@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 24</title>
+  </head>
+  <body>
+    <script>
+      // Task 1, 2, 3, 4
+
+      class User {
+        #name;
+        constructor(name, login, age) {
+          this.#name = name;
+          this.login = login;
+          this.age = age;
+        }
+        getName(isAdmin) {
+          return isAdmin
+            ? console.log(this.#name || this.login)
+            : console.log("Permission denied");
+        }
+        changeName(name, pas) {
+          pas === "123"
+            ? (console.log(`Name Changed from ${this.#name} to ${name}`),
+              (this.#name = name))
+            : console.log("Permission denied");
+        }
+      }
+
+      class Admin extends User {
+        #isAdmin = true;
+        constructor(name, login, age) {
+          super(name, login, age);
+          this.#isAdmin = true;
+        }
+        getUserName(user) {
+          user.getName(this.#isAdmin);
+        }
+      }
+
+      const user1 = new User("Mike", "MK_18", 18);
+      const user2 = new User("", "NRG", 22);
+
+      const admin = new Admin("Bob", "Admin", 33);
+
+      console.log(user1.login);
+      console.log(user1.age);
+      console.log(user2.login);
+      console.log(user2.age);
+
+      user1.getName(true);
+      user2.getName(true);
+      user2.getName(false);
+
+      user1.changeName("Bill", "123");
+
+      admin.getUserName(user1);
+
+      // Task 5
+
+      // class User {
+      //   #phone;
+      //   constructor(name, phone) {
+      //     this.name = name;
+      //     this.#phone = phone;
+      //   }
+      //   getPhon(isAdmin) {
+      //     if (isAdmin === true) {
+      //       console.log(this.#phone);
+      //       return this.#phone;
+      //     } else {
+      //       const splittedPassword = this.#phone.split("-");
+      //       const firstPart = splittedPassword[0];
+      //       const lastPart = splittedPassword[splittedPassword.length - 1];
+      //       console.log(`${firstPart}-******-${lastPart}`);
+      //       return `${firstPart}-******-${lastPart}`;
+      //     }
+      //   }
+      // }
+
+      // const user1 = new User("Mike", "067-888-88-99");
+      // const user2 = new User("Tom", "099-888-88-99");
+
+      // user1.getPhon(false);
+      // user2.getPhon(false);
+
+      // user1.getPhon(true);
+      // user2.getPhon(true);
+    </script>
+  </body>
+</html>
